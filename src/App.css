@@ -383,7 +383,6 @@ img{
 
   .tokenomics .left .content ul:nth-of-type(2) li {
     color: #F0F0F0;
-    opacity: .7;
     font-size: 1vw;
     line-height: 140%;
     list-style: disc;
@@ -909,15 +908,16 @@ img{
     display: flex;
     justify-content: space-between;
     width: 100%;
+    /* gap: 8vw; */
     padding-top: 8vw;
   }
 
   .tokenomics .left .content ul {
-    width: 49%;
+    width: 45%;
   }
 
   .tokenomics .left .content ul:nth-of-type(1) li {
-    color: white;
+    color: #F0F0F0;
     font-size: 2.9vw;
     line-height: 140%;
     list-style: disc;
@@ -926,7 +926,6 @@ img{
 
   .tokenomics .left .content ul:nth-of-type(2) li {
     color: #F0F0F0;
-    opacity: .7;
     font-size: 2.9vw;
     line-height: 140%;
     list-style: disc;
@@ -1173,5 +1172,13 @@ padding: 2vw 0;
 font-size: 2.5vw;
 text-align: center;
 }
+}
+@keyframes move {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rotate));
+  }
 }
 

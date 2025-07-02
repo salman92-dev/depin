@@ -1,55 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useMemo } from 'react';
 import './animateddots.css';
 
-const AnimatedDots = ({ className, dotCount }) => {
-  useEffect(() => {
-    const container = document.querySelector(`.${className}`);
+const AnimatedDots = ({ className = '', dotCount = 20 }) => {
+  // Precompute dots ONCE per mount/prop change
+  const dots = useMemo(() => {
+    return Array.from({ length: dotCount }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      tx: (Math.random() - 0.5) * 200, // random translate X in px
+      ty: (Math.random() - 0.5) * 200, // random translate Y in px
+      rotate: Math.random() * 720,
+      duration: 2 + Math.random() * 10, // random duration
+    }));
+  }, [dotCount]);
 
-    if (!container) return;
-
-    const containerWidth = container.clientWidth;
-    const containerHeight = container.clientHeight;
-
-    for (let i = 0; i < dotCount; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      container.appendChild(dot);
-
-      dot.style.left = `${Math.random() * 100}%`;
-      dot.style.top = `${Math.random() * 100}%`;
-      dot.style.animation = `move-${i} 25s linear infinite alternate`;
-
-      const keyframes = `
-        0% {
-          transform: translate(0, 0) rotate(0deg);
-          filter: brightness(100%);
-        }
-        100% {
-          transform: translate(${Math.random() * containerWidth - containerWidth / 2}px, ${Math.random() * containerHeight - containerHeight / 2}px) rotate(${Math.random() * 720}deg);
-        }
-      `;
-
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes move-${i} {
-          ${keyframes}
-        }
-      `;
-      document.head.appendChild(style);
-    }
-
-    return () => {
-      container.innerHTML = ''; // Clean up dots on unmount or prop change
-      const styles = document.querySelectorAll('style');
-      styles.forEach(style => {
-        if (style.textContent.includes('@keyframes move-')) {
-          style.remove();
-        }
-      });
-    };
-  }, [className, dotCount]);
-
-  return <div className={`container ${className}`}></div>;
+  return (
+    <div className={`container ${className}`}>
+      {dots.map((dot, i) => (
+        <div
+          key={i}
+          className="dot"
+          style={{
+            left: `${dot.left}%`,
+            top: `${dot.top}%`,
+            animation: `move ${dot.duration}s linear infinite alternate`,
+            '--tx': `${dot.tx}px`,
+            '--ty': `${dot.ty}px`,
+            '--rotate': `${dot.rotate}deg`,
+          }}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default AnimatedDots;
