@@ -1,0 +1,78 @@
+
+  
+  .container {
+    position: relative;
+    /* border: 1px solid black; */
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  
+  .dot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+  
+  /* Additional classes for different sizes */
+  .container.dots1 {
+    position: absolute;
+    width: 80%;
+    height:80%;
+  }
+  
+  .container.dots2 {
+    position: absolute;
+    width: 70%;
+    height: 100%;
+  }
+  
+  .container.dots3 {
+    position: absolute;
+    width: 70%;
+    height: 100%;
+    transform: rotate(-125deg);
+  }
+  
+  .container.dots4 {
+    position: absolute;
+    left: 35%;
+    width: 30%;
+    height: 100%;
+    /* transform: rotate(-125deg); */
+  }
+  .container.dots5 {
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    top: 50vw;
+    height: 50%;
+  }
+  .container.dots6 {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    bottom: 0vw;
+    height: 80%;
+  }
+
+  @media(max-width:600px){
+  
+ 
+  .container.dots4 {
+    position: absolute;
+    left: 35%;
+    width: 30%;
+    height: 85%;
+
+  }
+  .container.dots5 {
+    position: absolute;
+    left: 13%;
+    width: 70%;
+    top: 100vw;
+    height: 70%;
+  }
+ 
+  }
